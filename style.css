@@ -1,0 +1,78 @@
+/* Style for input fields */
+.form-control {
+    border-radius: 25px;
+    /* Rounded corners for input fields */
+    transition: all 0.3s ease;
+    /* Smooth transition for hover/focus effects */
+}
+
+.form-control:focus {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    /* Add shadow on focus */
+    border-color: #007bff;
+    /* Focus border color */
+}
+
+/* Button style */
+.btn {
+    border-radius: 25px;
+    /* Rounded corners for buttons */
+    font-weight: bold;
+    background-color: #10b995;
+    /* Button color */
+    color: #005364;
+    /* Text color inside button */
+    border: none;
+    /* Remove border */
+    transition: all 0.3s ease;
+    /* Smooth transition for hover effect */
+}
+
+.btn:hover {
+    background-color: #00977e;
+    /* Hover effect: slightly darker shade */
+    color: #ffffff;
+    /* Change text color to white on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow on hover */
+}
+
+/* Card styling */
+.card {
+    border-radius: 15px;
+    /* Rounded corners for cards */
+}
+
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-img-top {
+    height: 200px;
+    /* Adjust the height based on your preference */
+    object-fit: cover;
+    /* Ensures the image maintains aspect ratio */
+}
+
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-text {
+    flex-grow: 1;
+    /* Makes the text take available space */
+}
+
+.btn {
+    margin-top: auto;
+    /* Pushes the buttons to the bottom */
+}
