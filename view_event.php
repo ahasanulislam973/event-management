@@ -2,15 +2,13 @@
 session_start();
 if (isset($_SESSION['user_id'])) {
 
-
-
     include 'header.php';
     include 'db_connection.php';
 
-    if (isset($_GET['id'])) {
-        $event_id = $_GET['id'];
+    if (isset($_POST['id'])) {
+        $event_id = $_POST['id'];
 
-        $query = "SELECT event_name, event_details, capacity, event_image FROM events WHERE id = ?";
+        $query = "SELECT event_name, event_details, capacity, event_image, event_date FROM events WHERE id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('i', $event_id);
         $stmt->execute();
@@ -29,9 +27,13 @@ if (isset($_SESSION['user_id'])) {
 
 ?>
 
+<div style="height: 100vh">
+
     <div class="container mt-5">
         <h2 class="mb-4"><?php echo htmlspecialchars($event['event_name']); ?></h2>
         <p><strong>Capacity:</strong> <?php echo nl2br(htmlspecialchars($event['capacity'])); ?></p>
+        
+        <p><strong>Event Date:</strong> <?php echo nl2br(htmlspecialchars($event['event_date'])); ?></p> <!-- Add this line to display event_date -->
 
         <div class="row">
             <div class="col-md-8">
@@ -52,6 +54,7 @@ if (isset($_SESSION['user_id'])) {
             <a href="event_list.php" class="btn btn-secondary rounded-pill">Back to Event List</a>
         </div>
     </div>
+</div>
 
 <?php
     mysqli_close($conn);

@@ -1,8 +1,8 @@
 <?php
 include 'db_connection.php';
 
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $event_id = intval($_GET['id']);
+if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+    $event_id = intval($_POST['id']);
 
     $query = "SELECT name, email, phone FROM attendees WHERE event_id = ?";
     $stmt = mysqli_prepare($conn, $query);

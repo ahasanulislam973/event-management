@@ -2,7 +2,7 @@
 include 'db_connection.php';
 include 'header.php';
 
-$event_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$event_id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
 if ($event_id === 0) {
     echo "<script>alert('Invalid event.'); window.location.href='index.php';</script>";
@@ -31,6 +31,9 @@ if ($event_id === 0) {
                 <button type="submit" class="btn w-100 rounded-pill" style="background-color: #10b995; color: #005364;">
                     Register
                 </button>
+                <a href="index.php" class="btn btn-secondary w-100 mt-3" style="border-radius: 50px;">
+                <i class="bi bi-arrow-left"></i> Back
+            </a>
             </form>
         </div>
     </div>

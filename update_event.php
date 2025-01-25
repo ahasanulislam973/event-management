@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $event_name = mysqli_real_escape_string($conn, $_POST['event_name']);
     $description = mysqli_real_escape_string($conn, $_POST['description']);
     $event_capacity = (int) $_POST['event_capacity'];
+    $event_date = mysqli_real_escape_string($conn, $_POST['event_date']);
     $event_image = '';
     $user_id = $_SESSION['user_id'];
 
@@ -28,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (!empty($event_image)) {
-        $update_query = "UPDATE events SET event_name='$event_name', event_details='$description', event_image='$event_image', capacity='$event_capacity', user_id='$user_id' WHERE id=$event_id";
+        $update_query = "UPDATE events SET event_name='$event_name', event_details='$description', event_image='$event_image', event_date='$event_date', capacity='$event_capacity', user_id='$user_id' WHERE id=$event_id";
     } else {
-        $update_query = "UPDATE events SET event_name='$event_name', event_details='$description', capacity='$event_capacity', user_id='$user_id' WHERE id=$event_id";
+        $update_query = "UPDATE events SET event_name='$event_name', event_details='$description', event_date='$event_date', capacity='$event_capacity', user_id='$user_id' WHERE id=$event_id";
     }
 
     if (mysqli_query($conn, $update_query)) {

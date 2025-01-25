@@ -9,6 +9,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = $_POST['phone'];
     $password = $_POST['password'];
 
+    // Password validation regex (must include at least one number, lowercase letter, uppercase letter, and special character)
+    $passwordPattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
+
+    // Check if password meets the requirements
+    if (!preg_match($passwordPattern, $password)) {
+        $_SESSION['error'] = "Password must contain at least one number, one lowercase letter, one uppercase letter, and one special character.";
+        header("Location: register.php");
+        exit();
+    }
+
     // Hash the password using bcrypt
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 

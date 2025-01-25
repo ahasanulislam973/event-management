@@ -7,6 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $event_name = $_POST['event_name'];
     $event_details = $_POST['description'];
     $event_capacity = (int) $_POST['event_capacity'];
+    $event_date = $_POST['event_date'];
+    
 
     if (!isset($_SESSION['user_id'])) {
         $_SESSION['error'] = "You must be logged in to create an event.";
@@ -59,9 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $sql = "INSERT INTO events (event_name, event_details, capacity, event_image, user_id) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO events (event_name, event_details, capacity, event_image, event_date, user_id) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ssisi", $event_name, $event_details, $event_capacity, $new_image_name, $user_id);
+    mysqli_stmt_bind_param($stmt, "ssisis", $event_name, $event_details, $event_capacity, $new_image_name, $event_date, $user_id);
 
     if (mysqli_stmt_execute($stmt)) {
         $_SESSION['success'] = "Event created successfully!";
