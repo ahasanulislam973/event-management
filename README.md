@@ -33,7 +33,7 @@
 ### Update the database connection settings according to local environment:
 
 ### Run the Project:
-1. Open your web browser and enter the following URL:
+1. Open web browser and enter the following URL:
     http://localhost/event-management
 
 ## Features:
