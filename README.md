@@ -30,7 +30,7 @@
 ### Configure Database Connection
 1. Open the db_connection.php file in the project root directory.
 
-## Update the database connection settings according to local environment:
+### Update the database connection settings according to local environment:
 
 ### Run the Project:
 1. Open your web browser and enter the following URL:
