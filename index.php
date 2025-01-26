@@ -144,5 +144,3 @@ $total_pages = ceil($total_events / $limit);
         }
     }
 </style>
-
-<?php include 'footer.php'; ?>

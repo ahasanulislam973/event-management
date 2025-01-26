@@ -2,7 +2,7 @@
 $dbhost="localhost";
 $dbuser="root";
 $dbpass="";
-$dbname="event-management";
+$dbname="event_management";
 $conn=mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
 
 if(!$conn){

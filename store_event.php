@@ -8,7 +8,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $event_details = $_POST['description'];
     $event_capacity = (int) $_POST['event_capacity'];
     $event_date = $_POST['event_date'];
-    
+
+    $event_date = date('Y-m-d', strtotime($event_date));
+
+    if (!$event_date || $event_date == "1970-01-01") {
+        $_SESSION['error'] = "Invalid date format. Please provide a valid date.";
+        header("Location: create_event.php");
+        exit();
+    }
 
     if (!isset($_SESSION['user_id'])) {
         $_SESSION['error'] = "You must be logged in to create an event.";
@@ -17,12 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $user_id = $_SESSION['user_id'];
 
-    $image_name = $_FILES['event_image']['name'];
-    $image_tmp_name = $_FILES['event_image']['tmp_name'];
-    $image_size = $_FILES['event_image']['size'];
-    $image_error = $_FILES['event_image']['error'];
+    if (isset($_FILES['event_image']) && $_FILES['event_image']['error'] === 0) {
+        $image_name = $_FILES['event_image']['name'];
+        $image_tmp_name = $_FILES['event_image']['tmp_name'];
+        $image_size = $_FILES['event_image']['size'];
+        $image_error = $_FILES['event_image']['error'];
 
-    if ($image_error === 0) {
         if ($image_size < 5000000) {
             $image_extension = pathinfo($image_name, PATHINFO_EXTENSION);
             $image_extension = strtolower($image_extension);
@@ -32,7 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $new_image_name = uniqid('', true) . '.' . $image_extension;
                 $image_upload_path = 'uploads/' . $new_image_name;
 
-                move_uploaded_file($image_tmp_name, $image_upload_path);
+                if (!move_uploaded_file($image_tmp_name, $image_upload_path)) {
+                    $_SESSION['error'] = "Failed to upload image.";
+                    header("Location: create_event.php");
+                    exit();
+                }
             } else {
                 $_SESSION['error'] = "Invalid image format. Only JPG, JPEG, PNG, GIF are allowed.";
                 header("Location: create_event.php");
@@ -60,10 +71,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: create_event.php");
         exit();
     }
+    mysqli_stmt_close($stmt);
 
     $sql = "INSERT INTO events (event_name, event_details, capacity, event_image, event_date, user_id) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ssisis", $event_name, $event_details, $event_capacity, $new_image_name, $event_date, $user_id);
+    mysqli_stmt_bind_param($stmt, "ssissi", $event_name, $event_details, $event_capacity, $new_image_name, $event_date, $user_id);
 
     if (mysqli_stmt_execute($stmt)) {
         $_SESSION['success'] = "Event created successfully!";
@@ -78,3 +90,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 }
+?>

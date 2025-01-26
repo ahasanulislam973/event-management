@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2025 at 06:39 PM
+-- Generation Time: Jan 26, 2025 at 07:29 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -46,7 +46,8 @@ INSERT INTO `attendees` (`id`, `event_id`, `name`, `email`, `phone`, `created_at
 (2, 1, 'Irfan', 'irfan@gmail.com', '01309605438', NULL, NULL),
 (3, 1, 'Md. Ahasanul Islam', 'ahasanulislam973@gmail.com', '01774382608', NULL, NULL),
 (4, 3, 'Stephen Fleming', 'muwezabis@mailinator.com', '+1 (771) 771-4077', NULL, NULL),
-(5, 3, 'Velma Golden1111', 'kokonu@mailinator.com1111', '01774382608', NULL, NULL);
+(5, 3, 'Velma Golden1111', 'kokonu@mailinator.com1111', '01774382608', NULL, NULL),
+(6, 3, 'Md. Ahasanul Islam', 'ahasanulislam973@gmail.com', '01774382608', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -62,15 +63,17 @@ CREATE TABLE `events` (
   `event_image` varchar(255) NOT NULL,
   `capacity` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `event_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `user_id`, `event_name`, `event_details`, `event_image`, `capacity`, `created_at`, `updated_at`) VALUES
-(3, 1, 'Hayden Hart', 'Aut quasi nostrum do', '6793cb04062734.91408075.jpg', 25, NULL, NULL);
+INSERT INTO `events` (`id`, `user_id`, `event_name`, `event_details`, `event_image`, `capacity`, `created_at`, `updated_at`, `event_date`) VALUES
+(7, 1, 'Alana Mckee', 'Culpa suscipit vel a', '67967685f16045.52749849.jpg', 33, NULL, NULL, '2025-05-09'),
+(8, 1, 'Nomlanga Mcneil', 'Id ut odit reiciendi', '679676aa04cd32.95213488.png', 92, NULL, NULL, '1994-04-10');
 
 -- --------------------------------------------------------
 
@@ -130,13 +133,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendees`
 --
 ALTER TABLE `attendees`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
